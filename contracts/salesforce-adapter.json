@@ -1,0 +1,2 @@
+{"name":"salesforce-revenue-cloud","status":"contract-not-exercised","objects":["Account","Opportunity","Order","Contract","Case"],"write_actions_require_approval":true}
+

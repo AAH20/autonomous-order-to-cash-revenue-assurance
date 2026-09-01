@@ -1,0 +1,2 @@
+{"name":"sap-s4hana-o2c","status":"contract-not-exercised","interfaces":["sales-order","outbound-delivery","billing-document","customer-payment","journal-entry"],"transport":["odata","idoc","integration-suite"],"write_actions_require_approval":true}
+

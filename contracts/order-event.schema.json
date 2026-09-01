@@ -1,0 +1,2 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"O2C transaction event","type":"object","required":["event_id","order_id","event_type","occurred_at","source"],"properties":{"event_id":{"type":"string"},"order_id":{"type":"string"},"event_type":{"enum":["order","shipment","invoice","payment","cash-application","ledger"]},"occurred_at":{"type":"string","format":"date-time"},"source":{"type":"string"},"amount_usd":{"type":"number"}},"additionalProperties":true}
+

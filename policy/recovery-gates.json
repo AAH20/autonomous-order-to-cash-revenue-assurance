@@ -1,0 +1,2 @@
+{"schema":"o2c.recovery-gates.v1","automatic_allowed":["assemble-dispute-evidence","match-payment-below-approved-threshold"],"human_approval_required":["credit-release","invoice-create-or-void","refund","write-off","pricing-change","ledger-adjustment"],"hard_gates":{"idempotency_key":true,"source-evidence":true,"maximum-action-value":true,"outcome-verification":true},"prohibited":["llm-direct-ledger-write","unbounded-credit","recovery-claim-without-verification","silent-accounting-tolerance-change"]}
+
