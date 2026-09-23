@@ -1,0 +1,2 @@
+payment_id,invoice_id,customer_id,currency,amount,received_at
+P100,I100,C100,USD,100.00,2026-09-15

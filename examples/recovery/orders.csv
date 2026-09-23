@@ -1,0 +1,7 @@
+order_id,customer_id,currency,total,fulfilled_at,status
+O100,C100,USD,100.00,2026-08-01,fulfilled
+O200,C200,USD,50.00,2026-08-05,fulfilled
+O300,C300,USD,40.00,,pending
+O400,C400,USD,80.00,2026-08-04,fulfilled
+O500,C500,USD,20.00,2026-09-07,fulfilled
+O600,C600,USD,15.00,,cancelled

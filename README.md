@@ -10,6 +10,8 @@ Enterprise revenue leaks between order acceptance and cash in the ledger. This p
 
 The [read-only reconciliation pilot](docs/RECONCILIATION_PILOT.md) adds a separate `o2c-reconcile` command for normalized invoice and payment CSV exports. It produces a finance review queue with conservative matching and explicit limitations. It has no live accounting connector or write-back path, and its example exports are fictional.
 
+The [Revenue Recovery Operator pilot](docs/REVENUE_RECOVERY_OPERATOR.md) adds `o2c-recovery scan` for fulfilled-but-uninvoiced order exports and `o2c-recovery confirm` for later reviewer, invoice, payment and ledger linkage. Its fictional example shows cash posted after a finding; it **does not prove causal recovery or customer savings**. Both commands are read-only and require no external account.
+
 ## Reproduce
 
 ```bash

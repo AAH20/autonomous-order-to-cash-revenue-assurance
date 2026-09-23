@@ -13,3 +13,6 @@ jobs:
       - run: python examples/generate_case.py
       - run: python -m revenue_assurance.cli examples/synthetic-10000-orders.json --output /tmp/evidence.json
       - run: python -m revenue_assurance.reconcile examples/reconciliation/invoices.csv examples/reconciliation/payments.csv --as-of 2026-09-23 --output /tmp/review-queue.json
+      - run: o2c-recovery scan examples/recovery/orders.csv examples/recovery/invoices-scan.csv --as-of 2026-09-10 --invoice-export-through 2026-09-10 --output /tmp/o2c-recovery-scan.json
+      - run: o2c-recovery confirm /tmp/o2c-recovery-scan.json examples/recovery/reviews.csv examples/recovery/invoices-followup.csv examples/recovery/payments-followup.csv examples/recovery/ledger-followup.csv --output /tmp/o2c-recovery-confirmation.json
+      - run: python -c 'import json; d=json.load(open("/tmp/o2c-recovery-confirmation.json")); assert d["totals_by_currency"] == {"USD":"100.00"} and d["findings"][0]["status"] == "LEDGER_CONFIRMED_CASH_AFTER_FINDING"'

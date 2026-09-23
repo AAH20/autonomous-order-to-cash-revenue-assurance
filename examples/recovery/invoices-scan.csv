@@ -1,0 +1,3 @@
+invoice_id,order_id,customer_id,currency,total,issued_at
+I200,O200,C200,USD,50.00,2026-08-06
+I400,O400,C400,USD,70.00,2026-08-05
