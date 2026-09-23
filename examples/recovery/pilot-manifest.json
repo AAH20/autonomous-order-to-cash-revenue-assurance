@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "customer_key": "fictional-merchant",
+  "period": "2026-08",
+  "as_of": "2026-09-10",
+  "invoice_export_through": "2026-09-10",
+  "grace_days": 7,
+  "sources": {
+    "orders": {
+      "path": "orders.csv",
+      "rows": 6,
+      "totals_by_currency": {"USD": "305.00"}
+    },
+    "invoices": {
+      "path": "invoices-scan.csv",
+      "rows": 2,
+      "totals_by_currency": {"USD": "120.00"}
+    }
+  }
+}

@@ -16,3 +16,5 @@ jobs:
       - run: o2c-recovery scan examples/recovery/orders.csv examples/recovery/invoices-scan.csv --as-of 2026-09-10 --invoice-export-through 2026-09-10 --output /tmp/o2c-recovery-scan.json
       - run: o2c-recovery confirm /tmp/o2c-recovery-scan.json examples/recovery/reviews.csv examples/recovery/invoices-followup.csv examples/recovery/payments-followup.csv examples/recovery/ledger-followup.csv --output /tmp/o2c-recovery-confirmation.json
       - run: python -c 'import json; d=json.load(open("/tmp/o2c-recovery-confirmation.json")); assert d["totals_by_currency"] == {"USD":"100.00"} and d["findings"][0]["status"] == "LEDGER_CONFIRMED_CASH_AFTER_FINDING"'
+      - run: o2c-pilot run examples/recovery/pilot-manifest.json --output-dir /tmp/o2c-pilot-ci
+      - run: o2c-pilot followup /tmp/o2c-pilot-ci/scan.json examples/recovery/reviews.csv examples/recovery/invoices-followup.csv examples/recovery/payments-followup.csv examples/recovery/ledger-followup.csv --output /tmp/o2c-pilot-followup.json

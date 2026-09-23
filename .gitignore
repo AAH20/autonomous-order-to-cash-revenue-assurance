@@ -4,4 +4,6 @@ __pycache__/
 *.egg-info/
 evidence/*.json
 !evidence/README.md
-
+customer-data/
+pilot-runs/
+.DS_Store

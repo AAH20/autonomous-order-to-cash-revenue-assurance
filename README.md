@@ -12,6 +12,8 @@ The [read-only reconciliation pilot](docs/RECONCILIATION_PILOT.md) adds a separa
 
 The [Revenue Recovery Operator pilot](docs/REVENUE_RECOVERY_OPERATOR.md) adds `o2c-recovery scan` for fulfilled-but-uninvoiced order exports and `o2c-recovery confirm` for later reviewer, invoice, payment and ledger linkage. Its fictional example shows cash posted after a finding; it **does not prove causal recovery or customer savings**. Both commands are read-only and require no external account.
 
+The [Revenue Recovery Cloud pilot workflow](docs/REVENUE_RECOVERY_CLOUD.md) packages a monthly, customer-scoped local run around that operator. `o2c-pilot run` validates customer-declared row counts and currency totals before writing a scan, review queue and summary. `o2c-pilot followup` creates an immutable follow-up report from reviewer and later accounting exports. This is a **local pilot tool**, not a hosted multi-tenant service or a live connector.
+
 ## Reproduce
 
 ```bash
