@@ -8,6 +8,8 @@ Enterprise revenue leaks between order acceptance and cash in the ledger. This p
 
 > The local engine and tests are implemented. The 10,000-order case is synthetic. SAP, Salesforce and Azure integrations are contracts until exercised with authorization.
 
+The [read-only reconciliation pilot](docs/RECONCILIATION_PILOT.md) adds a separate `o2c-reconcile` command for normalized invoice and payment CSV exports. It produces a finance review queue with conservative matching and explicit limitations. It has no live accounting connector or write-back path, and its example exports are fictional.
+
 ## Reproduce
 
 ```bash
@@ -78,4 +80,3 @@ Order to cash, order-to-cash automation, accounts receivable automation, SAP ord
 ## Engage
 
 [Request an order-to-cash revenue assurance assessment](https://a2zsoc.com/contact?topic=order-to-cash-revenue-assurance&utm_source=github&utm_medium=repository).
-

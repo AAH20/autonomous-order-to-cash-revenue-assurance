@@ -1,0 +1,4 @@
+invoice_id,customer_id,currency,total,due_date
+INV-001,CUST-A,USD,100.00,2026-08-31
+INV-002,CUST-B,USD,80.00,2026-09-01
+INV-003,CUST-C,USD,50.00,2026-10-01

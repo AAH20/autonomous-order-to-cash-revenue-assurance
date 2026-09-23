@@ -3,14 +3,14 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "autonomous-order-to-cash-revenue-assurance"
-version = "0.1.0"
+version = "0.2.0"
 description = "Agentic order-to-cash reconciliation, revenue leakage detection and recovery verification"
 requires-python = ">=3.11"
 dependencies = []
 [project.scripts]
 o2c-assurance = "revenue_assurance.cli:main"
+o2c-reconcile = "revenue_assurance.reconcile:main"
 [tool.setuptools]
 package-dir = {"" = "src"}
 [tool.setuptools.packages.find]
 where = ["src"]
-
