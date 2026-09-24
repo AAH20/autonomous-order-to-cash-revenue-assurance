@@ -12,6 +12,7 @@ o2c-assurance = "revenue_assurance.cli:main"
 o2c-reconcile = "revenue_assurance.reconcile:main"
 o2c-recovery = "revenue_assurance.recovery_operator:main"
 o2c-pilot = "revenue_assurance.pilot:main"
+o2c-review = "revenue_assurance.review_desk:main"
 [tool.setuptools]
 package-dir = {"" = "src"}
 [tool.setuptools.packages.find]

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from datetime import date, timedelta
 from decimal import Decimal
 from pathlib import Path
@@ -71,11 +72,14 @@ def _invoices(path: Path) -> dict[str, dict]:
 
 
 def scan(orders_path: Path, invoices_path: Path, *, as_of: date,
-         invoice_export_through: date, grace_days: int = 7) -> dict:
+         invoice_export_through: date, grace_days: int = 7,
+         order_period: str | None = None) -> dict:
     if type(grace_days) is not int or not 0 <= grace_days <= 90:
         raise ValueError("grace_days must be 0..90")
     if invoice_export_through < as_of:
         raise ValueError("invoice export must cover the scan date")
+    if order_period is not None and not re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", order_period):
+        raise ValueError("order_period must be YYYY-MM")
     orders = _orders(orders_path)
     invoices = _invoices(invoices_path)
     by_order: dict[str, list[dict]] = {}
@@ -86,11 +90,15 @@ def scan(orders_path: Path, invoices_path: Path, *, as_of: date,
             by_order.setdefault(invoice["order_id"], []).append(invoice)
     findings = []
     held = []
+    in_scope_fulfilled = 0
     for order in orders.values():
         if order["status"] != "fulfilled":
             continue
         if order["fulfilled_at"] > as_of:
             raise ValueError("fulfilled order dated after scan date")
+        if order_period is not None and order["fulfilled_at"].strftime("%Y-%m") != order_period:
+            continue
+        in_scope_fulfilled += 1
         linked = by_order.get(order["order_id"], [])
         if not linked and order["total"] > 0 and order["fulfilled_at"] + timedelta(days=grace_days) <= as_of:
             findings.append({"finding_id": _finding_id(order), "order_id": order["order_id"],
@@ -108,6 +116,7 @@ def scan(orders_path: Path, invoices_path: Path, *, as_of: date,
         "schema_version": "1.0", "as_of": as_of.isoformat(),
         "invoice_export_through": invoice_export_through.isoformat(),
         "grace_days": grace_days, "orders": len(orders), "invoices": len(invoices),
+        "order_period": order_period, "in_scope_fulfilled_orders": in_scope_fulfilled,
         "input_sha256": {"orders": _hash(orders_path), "invoices": _hash(invoices_path)},
         "findings": findings, "held_for_manual_review": held,
         "boundary": "Export completeness is operator-declared. Findings are possible missing invoices, not verified receivables or recovered cash. No write-back.",

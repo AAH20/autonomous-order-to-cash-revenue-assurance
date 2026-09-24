@@ -17,4 +17,10 @@ jobs:
       - run: o2c-recovery confirm /tmp/o2c-recovery-scan.json examples/recovery/reviews.csv examples/recovery/invoices-followup.csv examples/recovery/payments-followup.csv examples/recovery/ledger-followup.csv --output /tmp/o2c-recovery-confirmation.json
       - run: python -c 'import json; d=json.load(open("/tmp/o2c-recovery-confirmation.json")); assert d["totals_by_currency"] == {"USD":"100.00"} and d["findings"][0]["status"] == "LEDGER_CONFIRMED_CASH_AFTER_FINDING"'
       - run: o2c-pilot run examples/recovery/pilot-manifest.json --output-dir /tmp/o2c-pilot-ci
+      - run: o2c-review /tmp/o2c-pilot-ci init
+      - run: o2c-review /tmp/o2c-pilot-ci review F-9f0705e905eda11134e5 --decision confirmed_uninvoiced --reviewer 'CI synthetic reviewer' --minutes 12
+      - run: o2c-review /tmp/o2c-pilot-ci metrics --hourly-rate-usd 60.00
+      - run: o2c-review /tmp/o2c-pilot-ci export --output /tmp/o2c-pilot-ci/reviews-journal.csv
+      - run: o2c-pilot followup /tmp/o2c-pilot-ci/scan.json /tmp/o2c-pilot-ci/reviews-journal.csv examples/recovery/invoices-followup.csv examples/recovery/payments-followup.csv examples/recovery/ledger-followup.csv --output /tmp/o2c-pilot-journal-followup.json
+      - run: python -c 'import json; d=json.load(open("/tmp/o2c-pilot-journal-followup.json")); assert d["totals_by_currency"] == {} and d["findings"][0]["status"] == "REVIEWED_NO_CONFIRMED_CASH"'
       - run: o2c-pilot followup /tmp/o2c-pilot-ci/scan.json examples/recovery/reviews.csv examples/recovery/invoices-followup.csv examples/recovery/payments-followup.csv examples/recovery/ledger-followup.csv --output /tmp/o2c-pilot-followup.json

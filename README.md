@@ -14,6 +14,8 @@ The [Revenue Recovery Operator pilot](docs/REVENUE_RECOVERY_OPERATOR.md) adds `o
 
 The [Revenue Recovery Cloud pilot workflow](docs/REVENUE_RECOVERY_CLOUD.md) packages a monthly, customer-scoped local run around that operator. `o2c-pilot run` validates customer-declared row counts and currency totals before writing a scan, review queue and summary. `o2c-pilot followup` creates an immutable follow-up report from reviewer and later accounting exports. This is a **local pilot tool**, not a hosted multi-tenant service or a live connector.
 
+**New: [Fulfillment-to-Cash review desk](docs/FULFILLMENT_TO_CASH.md).** The monthly pilot now scans only fulfilled orders from its declared month, even if the source export also contains other months. `o2c-review` binds write-once finance decisions to that exact scan, records reviewer minutes, and exports a follow-up-compatible CSV. An assumed hourly rate produces a labeled review-cost estimate. The reviewer name is self-declared and the SQLite journal is not tamper-proof. The included example remains fictional.
+
 ## Reproduce
 
 ```bash

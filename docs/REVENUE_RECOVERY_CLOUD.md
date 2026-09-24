@@ -2,6 +2,8 @@
 
 This release adds an executable **local, read-only** pilot workflow to the existing recovery engine. It is intended for one customer-controlled workspace and one accounting period at a time. It does not connect to an ERP, authenticate a reviewer, host customer data, invoice anyone, or contact debtors. The included merchant and every amount are fictional.
 
+The current pilot additionally enforces the declared order month and supports the local [Fulfillment-to-Cash review desk](FULFILLMENT_TO_CASH.md) as a structured alternative to editing the review CSV by hand.
+
 ```mermaid
 flowchart LR
   M[Customer-approved manifest] --> V[Row and currency control checks]

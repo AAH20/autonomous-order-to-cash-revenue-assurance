@@ -83,7 +83,8 @@ def prepare(manifest_path: Path) -> tuple[dict, dict]:
     _control(orders_source, orders, "total", "orders")
     _control(invoices_source, invoices, "total", "invoices")
     report = scan(orders_path, invoices_path, as_of=as_of,
-                  invoice_export_through=cutoff, grace_days=manifest.get("grace_days", 7))
+                  invoice_export_through=cutoff, grace_days=manifest.get("grace_days", 7),
+                  order_period=period)
     exposed: dict[str, Decimal] = {}
     for finding in report["findings"]:
         currency = finding["currency"]
@@ -93,6 +94,7 @@ def prepare(manifest_path: Path) -> tuple[dict, dict]:
         "as_of": report["as_of"], "input_sha256": report["input_sha256"],
         "declared_source_controls_passed": True,
         "orders": report["orders"], "invoices": report["invoices"],
+        "in_scope_fulfilled_orders": report["in_scope_fulfilled_orders"],
         "finding_count": len(report["findings"]),
         "held_count": len(report["held_for_manual_review"]),
         "possible_exposure_by_currency": {

@@ -1,4 +1,3 @@
 # Security
 
-Report vulnerabilities through GitHub Security Advisories. Do not add real orders, invoices, payments, bank data, credentials or customer exports. The engine is advisory and requires authenticated execution, separation of duties and outcome verification in production.
-
+Report vulnerabilities through GitHub Security Advisories. Do not add real orders, invoices, payments, bank data, credentials or customer exports. The local review desk stores reviewer names and finding decisions in `finance-review.sqlite3`; keep the entire pilot directory in customer-controlled storage with appropriate permissions, encryption, backup and retention. Its application-level write-once checks do not stop a person with direct database access from modifying records. The engine is advisory and requires authenticated reviewers, separation of duties, source verification and outcome verification in production.
